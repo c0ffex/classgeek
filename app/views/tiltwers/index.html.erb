@@ -1,0 +1,57 @@
+<div class="row mt-5">
+    <div class="col-4">
+        <div class="card" style="width: 18rem;">
+            <% url = Gravatar.new(current_user.email).image_url %>
+            <%= image_tag url, class: "card-img-top" %>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+
+        <p id="notice"><%= notice %></p>
+
+        <h1>Tiltwers</h1>
+        <%= link_to 'new Tiltwer', new_tiltwer_path, class: "btn btn-info btn-lg btn-block" %>
+
+        <% @tiltwers.order(id: :desc).each do |tiltwer| %>
+        <div class="container">
+
+            <div class="card mt-3">
+
+                    <h5 class="card-header ">
+                        <div class="row ml-1">
+                            <% perfil = Gravatar.new(tiltwer.user.email).image_url %>
+                            <%= image_tag perfil, class: "tiltwers-perfil-img" %>
+                            <%= tiltwer.user.username %>
+                        </div>
+                    </h5>
+                <div class="card-body mr-3 ">
+                    <p class="card-text"><%= tiltwer.content %></p>
+                    <% if tiltwer.photo.file? %>
+                        <p class="card-text"><%= image_tag tiltwer.photo.url %></p>
+                    <% end %>
+                    <%= link_to 'Show', tiltwer, class: "btn btn-primary mr-3 " %>
+                <% if tiltwer.user == current_user %>
+                <%= link_to 'Edit', edit_tiltwer_path(tiltwer), class: "btn btn-info mr-3 " %>
+                    <%= link_to 'Destroy', tiltwer, method: :delete, data: { confirm: 'Are you sure?' }, class:  "btn btn-danger" %>
+                    <% end %>
+            </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+    <% end %>
+
+
+<br>
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CLASSGEEK</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom">
+    <div class="container">
+      <%= link_to "Classgeek", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        <%= link_to "teams", parties_path, class: "nav-item nav-link" %>
+        <%= link_to "Tiltwer", tiltwers_path, class: "nav-item nav-link" %>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+        <% if !user_signed_in? %>
+            <%= link_to "sign in", new_user_session_path, class: "nav-item nav-link btn btn-danger mr-2" %>
+            <%= link_to "sign up", new_user_registration_path, class: "nav-item nav-link btn btn-primary" %>
+        <% else %>
+            <%= link_to "logout", destroy_user_session_path, :method => :delete, class: "nav-item  nav-link btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+   </div>
+    </nav>
+
+    <%flash.each do |name, message| %>
+        <div class="container">
+            <%= content_tag(:div, message, class: "alert alert-info") %>
+        </div>
+    <% end %>
+
+<div class="container">
+    <%= yield %>
+</div>
+</body>
+</html>

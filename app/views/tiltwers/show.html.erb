@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @tiltwer.user_id %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @tiltwer.content %>
+</p>
+
+<%= link_to 'Edit', edit_tiltwer_path(@tiltwer) %> |
+<%= link_to 'Back', tiltwers_path %>
